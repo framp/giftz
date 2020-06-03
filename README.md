@@ -1,3 +1,11 @@
+# Giftz
+
+An OSS application to manage encrypted giftcards.
+
+TODO
+
+## Tech
+
 This project was bootstrapped with [Create Solid](https://github.com/ryansolid/create-solid).
 
 ## Available Scripts
