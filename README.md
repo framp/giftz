@@ -2,7 +2,24 @@
 
 An OSS application to manage encrypted giftcards.
 
-TODO
+WIP but functional if you like to fiddle.
+
+## How to use
+
+ - Visit https://giftz.framp.me/#generateKey, this will generate a key and store it in your LocalStorage
+ - Add your cards data in the top textbox following the format (barcode is a base64 encoded png):
+```js
+[{
+  "barcode": "iVBORw0KGgoAAAANSUhEUgAAATgAAABkAQMAAAAoir4RAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEpJREFUSIntyrEJADEIQNGAreAqwrVCVhccwFUObA+SKa77r35rrPw1kRDNnKoO8/BWmdKzY2ueJ79ePB6Px+PxeDwej8fj8X57Fyyp9/PFewItAAAAAElFTkSuQmCC",
+  "number": "6341753502310869272",
+  "pin": "1234",
+  "amount": "20£",
+  "id": "1"
+}]
+```
+ - Get the `#importKey` link from the bottom input, send it safely to your target device 
+ - Get the `addCard` links from the bottom textbox, store them safely and send them to your device of choice without worrying about safety (a man in the middle will need to have the key from the previous step or access to your device to decrypt them)
+ - Click on the `I'm done` button to load the cards in your LocalStorage and access the application
 
 ## Tech
 
