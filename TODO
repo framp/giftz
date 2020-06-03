@@ -1,0 +1,15 @@
+ - Loading animation for card view
+ - Implement password
+ - Archive cards
+ - Page URL change for card
+ - Deduplicate cards
+ - Ask before generating key
+ - Keep old keys and link to cards
+ - Add notes
+ - Better split logic
+ - Hide used ones
+ - Filter / Sort
+ - Add notes
+ - Support names
+ - Download file on generation
+ - Show how much is left

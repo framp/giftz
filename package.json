@@ -1,0 +1,26 @@
+{
+  "name": "giftz",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "solid-js": "^0.18.4",
+    "solid-scripts": "0.0.35"
+  },
+  "scripts": {
+    "start": "solid-scripts start",
+    "build": "solid-scripts build",
+    "test": "solid-scripts test",
+    "beautify": "prettier --write src && standard --fix"
+  },
+  "browserslist": [
+    "Chrome 74",
+    "Firefox 63",
+    "Safari 11",
+    "Edge 17",
+    "Node 10"
+  ],
+  "devDependencies": {
+    "prettier": "^2.0.5",
+    "standard": "^14.3.4"
+  }
+}

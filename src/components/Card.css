@@ -1,0 +1,46 @@
+.card {
+  width: 100%;
+  background: #d2dae2;
+  border-radius: 10px;
+  color: #111;
+}
+.card.used {
+  background: #808e9b;
+  color: #333;
+}
+
+.card .buttons {
+  width: 100%;
+  display: flex;
+}
+.card .buttons button {
+  flex-grow: 1;
+  height: 50px;
+  flex-basis: 60px;
+  border: 0;
+  border-radius: 10px 0 0 0;
+  background: #485460;
+  color: #eee;
+  margin-right: 1px;
+}
+.card .buttons button:nth-child(2) {
+  border-radius: 0 10px 0 0;
+  margin-right: 0px;
+  margin-left: 1px;
+}
+
+.card .data {
+  padding: 20px;
+  text-align: center;
+}
+
+.card .data img,
+.card .data .card-number,
+.card .data .card-pin {
+  width: 100%;
+  display: block;
+}
+
+.card .data img {
+  margin-bottom: 20px;
+}

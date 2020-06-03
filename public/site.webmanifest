@@ -1,0 +1,19 @@
+{
+  "short_name": "Giftz",
+  "name": "Safely manage your giftcards",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#133C55",
+  "background_color": "#133C55",
+  "display": "standalone"
+}
