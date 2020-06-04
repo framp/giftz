@@ -13,3 +13,4 @@
  - Download file with links on generation
  - Generate different types of barcodes from data without having to provide an image
  - Support different formats other than png for barcodes
+ - Implement proper routing
