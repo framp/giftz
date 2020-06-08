@@ -1,15 +1,11 @@
- - Add domain to generated links
- - Implement password for key decryption with deriveKey
+ - Better UI for password input
  - Loading animation for card view for super slow devices
  - Manage (archive / delete) keys / cards
- - Page URL change for card
- - Ask before generating key
- - Keep old keys and link keys to cards
  - Add notes / how much money is left on the giftcard
  - Hide used ones
  - Filter / Sort
- - Add notes
  - Support names instead of ids
  - Download file with links on generation
  - Generate different types of barcodes from data without having to provide an image
  - Support different formats other than png for barcodes
+ - Add dates

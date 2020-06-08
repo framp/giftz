@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "solid-js": "^0.18.4",
-    "solid-scripts": "0.0.35"
+    "solid-router": "^0.3.3",
+    "solid-scripts": "0.0.35",
+    "uuid-random": "^1.3.0"
   },
   "scripts": {
     "start": "solid-scripts start",
