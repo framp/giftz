@@ -6,7 +6,7 @@ export const loadCards = () =>
   Object.keys(global.localStorage)
     .filter((key) => key.slice(0, 4) === 'card')
     .map((key) => JSON.parse(global.localStorage.getItem(key)))
-    .sort((a, b) => a.id - b.id)
+    .sort((a, b) => b.id - a.id)
 export const toggleUsedCard = (id) => {
   const card = JSON.parse(global.localStorage.getItem(`card-${id}`))
   card.used = !card.used
