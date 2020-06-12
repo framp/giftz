@@ -1,8 +1,8 @@
 import { createState, createEffect, useContext, Show } from 'solid-js'
-import { encryptCards, importCards, makeCardLink } from '../../logic/Card'
-import { generateKey, makeKeyLink, importKey } from '../../logic/Key'
-import FileTextArea from '../FileTextArea'
-import { StoreContext } from '../StoreProvider'
+import { encryptCards, importCards, makeCardLink } from '../logic/Card'
+import { generateKey, makeKeyLink, importKey } from '../logic/Key'
+import FileTextArea from '../components/FileTextArea'
+import { StoreContext } from '../components/StoreProvider'
 import './CreateKey.css'
 
 export default () => {

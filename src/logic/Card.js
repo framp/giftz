@@ -30,9 +30,9 @@ export const encryptCards = (key, cards, password) => {
   const keyId = key.id
   return Promise.all(
     cards.map(async ({ barcode, number, pin, amount, id }) => ({
-      barcode: await encryptEncode(key, barcode, password),
-      number: await encryptEncode(key, number, password),
-      pin: await encryptEncode(key, pin, password),
+      barcode: barcode && (await encryptEncode(key, barcode, password)),
+      number: number && (await encryptEncode(key, number, password)),
+      pin: pin && (await encryptEncode(key, pin, password)),
       amount: encodeURIComponent(amount),
       id,
       keyId
@@ -41,9 +41,9 @@ export const encryptCards = (key, cards, password) => {
 }
 export const decryptCard = async (key, card, password) => ({
   id: card.id,
-  barcode: await decryptDecode(key, card.barcode, password),
-  number: await decryptDecode(key, card.number, password),
-  pin: await decryptDecode(key, card.pin, password),
+  barcode: card.barcode && (await decryptDecode(key, card.barcode, password)),
+  number: card.number && (await decryptDecode(key, card.number, password)),
+  pin: card.pin && (await decryptDecode(key, card.pin, password)),
   amount: card.amount,
   used: card.used
 })

@@ -10,7 +10,7 @@ WIP but functional if you like to fiddle.
  - Add your cards data in the top textbox following the format (barcode is a base64 encoded png):
 ```js
 [{
-  "barcode": "iVBORw0KGgoAAAANSUhEUgAAATgAAABkAQMAAAAoir4RAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEpJREFUSIntyrEJADEIQNGAreAqwrVCVhccwFUObA+SKa77r35rrPw1kRDNnKoO8/BWmdKzY2ueJ79ePB6Px+PxeDwej8fj8X57Fyyp9/PFewItAAAAAElFTkSuQmCC",
+  "barcode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAABkAQMAAAAoir4RAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEpJREFUSIntyrEJADEIQNGAreAqwrVCVhccwFUObA+SKa77r35rrPw1kRDNnKoO8/BWmdKzY2ueJ79ePB6Px+PxeDwej8fj8X57Fyyp9/PFewItAAAAAElFTkSuQmCC",
   "number": "6341753502310869272",
   "pin": "1234",
   "amount": "20£",

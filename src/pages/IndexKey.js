@@ -1,7 +1,7 @@
 import { For, createEffect, createState, useContext } from 'solid-js'
 import './IndexCard.css'
-import { importKeyLink, loadExportedKeys } from '../../logic/Key'
-import { StoreContext } from '../StoreProvider'
+import { importKeyLink, loadExportedKeys } from '../logic/Key'
+import { StoreContext } from '../components/StoreProvider'
 
 export default () => {
   const { notify } = useContext(StoreContext)[1]

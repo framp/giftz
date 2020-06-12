@@ -1,8 +1,8 @@
 import { For, createEffect, createState, useContext } from 'solid-js'
 import { useHistory } from 'solid-router'
 import './IndexCard.css'
-import { importLinkCard, loadCards, toggleUsedCard } from '../../logic/Card'
-import { StoreContext } from '../StoreProvider'
+import { importLinkCard, loadCards, toggleUsedCard } from '../logic/Card'
+import { StoreContext } from '../components/StoreProvider'
 
 export default () => {
   const history = useHistory()

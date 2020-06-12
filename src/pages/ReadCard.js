@@ -1,16 +1,32 @@
 import { createEffect, createState, useContext, Show } from 'solid-js'
 import { useHistory } from 'solid-router'
 import './ReadCard.css'
-import { StoreContext } from '../StoreProvider'
-import { loadCard, decryptCard, toggleUsedCard } from '../../logic/Card'
-import { loadKey } from '../../logic/Key'
+import { StoreContext } from '../components/StoreProvider'
+import { loadCard, decryptCard, toggleUsedCard } from '../logic/Card'
+import { loadKey } from '../logic/Key'
+import Barcode from '../components/Barcode'
+import OnScreenKeyboard from '../components/OnScreenKeyboard'
+
+const parseBarcode = (barcode) => {
+  try {
+    const parsedBarcode = JSON.parse(barcode)
+    if (parsedBarcode && parsedBarcode.constructor === Object) {
+      return parsedBarcode
+    }
+  } catch (e) {}
+  return {
+    value: barcode
+  }
+}
 
 export default ({ cardId }) => {
   const [store, { notify, rememberPassword }] = useContext(StoreContext)
   const history = useHistory()
   const [state, setState] = createState({
     card: {},
-    password: '',
+    password: {
+      content: ''
+    },
     requirePassword: false,
     submittedPassword: false
   })
@@ -22,16 +38,17 @@ export default ({ cardId }) => {
     try {
       const key = await loadKey(
         loadedCard.keyId,
-        (state.submittedPassword && state.password) || savedPassword
+        (state.submittedPassword && state.password && state.password.content) ||
+          savedPassword
       )
       const decryptedCard = await decryptCard(key, loadedCard)
-      if (state.submittedPassword && state.password) {
-        rememberPassword(state.password, loadedCard.keyId)
+      if (state.submittedPassword && state.password && state.password.content) {
+        rememberPassword(state.password.content, loadedCard.keyId)
       }
       setState('card', decryptedCard)
     } catch (e) {
       setState({
-        password: '',
+        password: { content: '' },
         submittedPassword: false
       })
       if (e.message === 'password-required') {
@@ -46,8 +63,7 @@ export default ({ cardId }) => {
     const toggledCard = toggleUsedCard(targetId)
     setState('card', 'used', toggledCard.used)
   }
-  const onSubmitPasswod = (e) => {
-    e.preventDefault()
+  const onSubmitPassword = () => {
     setState('submittedPassword', true)
   }
   const card = state.card
@@ -61,22 +77,23 @@ export default ({ cardId }) => {
         </button>
       </div>
       <Show when={state.requirePassword && !state.submittedPassword}>
-        <div class='auth'>
-          Insert your password:
-          <input
-            type='password'
-            value={state.password}
-            onInput={(e) => setState('password', e.target.value)}
-          />
-          <button onClick={onSubmitPasswod}>Submit</button>
-        </div>
+        <OnScreenKeyboard
+          value={state.password}
+          onInput={(value) => setState('password', 'content', value)}
+          onSubmit={onSubmitPassword}
+        />
       </Show>
       <Show when={state.card.id}>
         <div class='data'>
           <h2>
             Card #{card.id} - {card.amount}
           </h2>
-          <img src={`data:image/png;base64, ${card.barcode}`} alt='barcode' />
+          {String(card.barcode).match(/^data:image/) ? (
+            <img src={card.barcode} alt='barcode' />
+          ) : (
+            <Barcode {...parseBarcode(card.barcode || card.number)} />
+          )}
+
           <span class='card-number'>
             {card.number &&
               [

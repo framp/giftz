@@ -5,10 +5,10 @@ import {
   Route,
   useHistory
 } from 'solid-router'
-import IndexCard from './pages/IndexCard'
-import ReadCard from './pages/ReadCard'
-import IndexKey from './pages/IndexKey'
-import CreateKey from './pages/CreateKey'
+import IndexCard from '../pages/IndexCard'
+import ReadCard from '../pages/ReadCard'
+import IndexKey from '../pages/IndexKey'
+import CreateKey from '../pages/CreateKey'
 import Notification from './Notification'
 import StoreProvider from './StoreProvider'
 import './App.css'
