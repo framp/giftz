@@ -1,4 +1,3 @@
- - Better UI for password input
  - Loading animation for card view for super slow devices
  - Manage (archive / delete) keys / cards
  - Add notes / how much money is left on the giftcard
@@ -6,6 +5,4 @@
  - Filter / Sort
  - Support names instead of ids
  - Download file with links on generation
- - Generate different types of barcodes from data without having to provide an image
- - Support different formats other than png for barcodes
  - Add dates
