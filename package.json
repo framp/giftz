@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "jsbarcode": "^3.11.0",
     "solid-js": "^0.18.4",
-    "solid-scripts": "0.0.35"
+    "solid-router": "^0.3.3",
+    "solid-scripts": "0.0.35",
+    "uuid-random": "^1.3.0"
   },
   "scripts": {
     "start": "solid-scripts start",

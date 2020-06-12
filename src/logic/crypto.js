@@ -1,25 +1,65 @@
-export const generateKey = () =>
-  window.crypto.subtle.generateKey(
+export const generateKey = async () => {
+  const raw = await window.crypto.subtle.generateKey(
     {
       name: 'AES-GCM',
       length: 256
     },
-    Boolean('extractable'),
+    Boolean('exportable'),
+    ['encrypt', 'decrypt']
+  )
+  return { raw }
+}
+export const generatePasswordKey = async (
+  password,
+  salt = window.crypto.getRandomValues(new Uint8Array(16))
+) => {
+  const importedPassword = await window.crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(password),
+    { name: 'PBKDF2' },
+    !'exportable',
+    ['deriveKey']
+  )
+  const raw = await window.crypto.subtle.deriveKey(
+    {
+      name: 'PBKDF2',
+      salt: salt,
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    importedPassword,
+    {
+      name: 'AES-GCM',
+      length: 256
+    },
+    !'exportable',
     ['encrypt', 'decrypt']
   )
 
-export const exportKey = (key) => window.crypto.subtle.exportKey('jwk', key)
+  return { raw, salt }
+}
 
-export const importKey = (key) =>
-  window.crypto.subtle.importKey(
+export const exportKeyRaw = (key) => window.crypto.subtle.exportKey('jwk', key)
+
+export const importKey = async (key, password) => {
+  if (!key.raw && key.salt) {
+    const { raw } = await generatePasswordKey(
+      password,
+      new Uint8Array(key.salt)
+    )
+    return { ...key, raw }
+  }
+  const raw = await window.crypto.subtle.importKey(
     'jwk',
-    key,
+    key.raw,
     {
       name: 'AES-GCM'
     },
     false,
     ['encrypt', 'decrypt']
   )
+  return { ...key, raw }
+}
 
 export const encrypt = (
   key,
@@ -33,7 +73,7 @@ export const encrypt = (
         iv,
         tagLength: 128
       },
-      key,
+      key.raw,
       new TextEncoder().encode(data)
     )
     .then((encrypted) => [iv, new Uint8Array(encrypted)])
@@ -46,24 +86,7 @@ export const decrypt = (key, [iv, data]) =>
         iv,
         tagLength: 128
       },
-      key,
+      key.raw,
       data
     )
     .then((decrypted) => new TextDecoder().decode(decrypted))
-
-export const encryptEncode = async (key, data) =>
-  global.btoa(
-    JSON.stringify(
-      await encrypt(key, String(data)).catch((e) =>
-        console.log('Encrypt error', e)
-      )
-    )
-  )
-
-export const decryptDecode = (key, data) =>
-  decrypt(
-    key,
-    JSON.parse(global.atob(data)).map(
-      (values) => new Uint8Array(Object.values(values))
-    )
-  ).catch((e) => console.log('Decrypt error', e))

@@ -44,3 +44,42 @@
 .card .data img {
   margin-bottom: 20px;
 }
+
+.card .auth h3 {
+  text-align:center;
+}
+.card .auth .input {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #333;
+}
+.card .auth .input .chars {
+  flex: 4;
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+  
+  justify-content: center;
+}
+.card .auth .input .chars span {
+  flex: 1;
+}
+.card .auth .input button.submit {
+  background: #485460;
+  color: #eee;
+}
+.card .auth .input button.submit:active {
+  color: #eee;
+  background: #133c55;
+}
+.card .auth button {
+  width: 20%;
+  height: 40px;
+  border: 2px solid #d2dae2;
+  transition: all 0.3s ease 0s;
+}
+.card .auth button:active {
+  color: #eee;
+  background: #133c55;
+}
