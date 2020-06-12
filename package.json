@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "solid-scripts start",
-    "build": "solid-scripts build",
+    "build": "solid-scripts build && cp build/index.html build/404.html",
     "test": "solid-scripts test",
     "beautify": "prettier --write src && standard --fix"
   },
