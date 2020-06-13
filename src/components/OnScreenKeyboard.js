@@ -18,11 +18,15 @@ export default ({ value, onInput, onSubmit }) => {
     e.preventDefault()
     onSubmit()
   }
+  const onClearClick = (e) => {
+    e.preventDefault()
+    onInput('')
+  }
 
   return (
     <div class='auth'>
-      <h3>Insert your password:</h3>
       <div class='input'>
+        <button onClick={onClearClick}>CLR</button>
         <div class='chars'>
           {value.content.split('').map((char, index, chars) => (
             <span key={index}>
@@ -34,7 +38,7 @@ export default ({ value, onInput, onSubmit }) => {
           ))}
         </div>
         <button class='submit' onClick={onSubmitClick}>
-          ✓
+          OK
         </button>
       </div>
       <div class='keyboard'>

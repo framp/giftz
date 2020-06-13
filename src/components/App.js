@@ -10,6 +10,7 @@ import ReadCard from '../pages/ReadCard'
 import IndexKey from '../pages/IndexKey'
 import CreateKey from '../pages/CreateKey'
 import Notification from './Notification'
+import MastHead from './MastHead'
 import StoreProvider from './StoreProvider'
 import './App.css'
 
@@ -18,6 +19,7 @@ export default () => (
     <ContextProvider>
       <div class='app'>
         <Notification />
+        <MastHead />
         <Router fallback={<div class='no-card'>404 Page</div>}>
           <Route path='/'>{() => useHistory().push('/cards')}</Route>
           <Route path='/cards'>{() => <IndexCard />}</Route>

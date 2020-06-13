@@ -23,7 +23,7 @@ export default () => {
       <ul class='card-list'>
         <For each={state.keys} fallback={<div class='no-card'>No Keys</div>}>
           {(key) => (
-            <li>
+            <li class='key'>
               <span>Key #{key.id}</span>
             </li>
           )}

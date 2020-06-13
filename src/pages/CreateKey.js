@@ -73,7 +73,9 @@ export default () => {
         </Show>
         <Show when={Boolean(state.key)}>
           <h3>Key import link generated:</h3>
-          <code>{makeKeyLink(state.exportedKey)}</code>
+          <div class='code-wrapper'>
+            <code>{makeKeyLink(state.exportedKey)}</code>
+          </div>
           <button onClick={onImportKey}>Import key link</button>
         </Show>
       </section>
@@ -86,7 +88,9 @@ export default () => {
           />
           <Show when={Boolean(state.cardOutput)}>
             <h3>Card import links generated:</h3>
-            <code>{state.cardOutput}</code>
+            <div class='code-wrapper'>
+              <code>{state.cardOutput}</code>
+            </div>
             <button onClick={onImportCards}>Import card links</button>
           </Show>
         </section>

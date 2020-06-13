@@ -3,6 +3,7 @@
   background: #d2dae2;
   border-radius: 10px;
   color: #111;
+  margin-top: 20px;
 }
 .card.used {
   background: #808e9b;
@@ -45,25 +46,28 @@
   margin-bottom: 20px;
 }
 
-.card .auth h3 {
-  text-align:center;
+.card .auth .header {
+  margin-top: 4px;
+  width: 100%;
+  font-size: small;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
 }
 .card .auth .input {
   height: 50px;
   display: flex;
   align-items: center;
-  border-top: 1px solid #333;
 }
 .card .auth .input .chars {
   flex: 4;
   text-align: center;
   line-height: 50px;
   display: flex;
-  
   justify-content: center;
 }
 .card .auth .input .chars span {
-  flex: 1;
+  margin: 3px;
 }
 .card .auth .input button.submit {
   background: #485460;

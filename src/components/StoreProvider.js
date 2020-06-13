@@ -12,7 +12,7 @@ export default (props) => {
     {
       notify (message) {
         setState('notification', message)
-        setTimeout(() => setState('notification', ''), 2000)
+        setTimeout(() => setState('notification', ''), 5000)
       },
       rememberPassword (password, keyId, timeout = 10 * 60 * 1000) {
         if (state.passwords[keyId] && state.passwords[keyId].passwordTimeout) {

@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px 10px 20px;
   box-sizing: border-box;
 }
 
@@ -15,22 +15,61 @@
   background: #fde073;
   text-align: center;
   line-height: 2.5;
-  overflow: hidden;
   box-shadow: 0 0 5px black;
-  animation: slideDown 10s 1s 1 ease forwards;
+  animation: slideDown 5s ease;
   transform: translateY(-50px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+}
+.masthead > * {
+  flex: 1;
+}
+.masthead > .links {
+  display: flex;
+  font-size: 14px;
+}
+.masthead h1 {
+  color: #eee;
+  margin: 5px;
+}
+.masthead a {
+  display: inline-block;
+  padding-bottom: 10px;
+  text-decoration: none;
+  color: #eee;
+  flex: 1;
+}
+.masthead a:after {
+  content: "";
+  top: 4px;
+  height: 1px;
+  display: block;
+  position: relative;
+}
+.masthead a:hover:after {
+  background: #eee;
 }
 
 @keyframes slideDown {
-  0%,
-  5% {
+  0% {
     transform: translateY(-50px);
   }
-  5%,
-  30% {
+  10% {
     transform: translateY(0px);
   }
-  70%,
+  90% {
+    transform: translateY(0px);
+  }
   100% {
     transform: translateY(-50px);
   }
