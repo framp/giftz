@@ -6,11 +6,23 @@
   color: #111;
   padding: 20px;
   box-sizing: border-box;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.15);
+}
+
+.setup-form h2 {
+  margin-top: 0;
 }
 
 .setup-form .help {
   font-size: 90%;
   text-align: center;
+}
+.setup-form .help a {
+  color: #485460;
+}
+.setup-form .help a:visited {
+  color: #5e4860;
 }
 
 .setup-form textarea {
@@ -19,7 +31,14 @@
   margin-top: 20px;
 }
 .setup-form input {
+  box-sizing: border-box;
   width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+}
+.setup-form input:focus {
+  outline: 0;
 }
 .setup-form .code-wrapper {
   padding: 10px;
@@ -38,10 +57,11 @@
   color: #485460;
   border: 0;
   padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
 }
 
 .setup-form button:active {
   color: #eee;
   background: #133c55;
-  transition: all 0.3s ease 0s;
 }

@@ -67,7 +67,7 @@ export default () => {
         />
         <button onClick={onGenerateKey}>Generate a key</button>
         <div class='help'>
-          <p>The password is required to access cards.</p>
+          <p>The password is required to access cards</p>
           <p>The key will be unlocked for 10 minutes</p>
         </div>
         <Show when={!state.password}>
@@ -93,7 +93,6 @@ export default () => {
             >
               here
             </a>
-            .
           </div>
           <FileTextArea
             value={state.cardInput}

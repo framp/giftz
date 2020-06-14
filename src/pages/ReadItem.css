@@ -1,0 +1,168 @@
+.item {
+  width: 100%;
+  background: #d2dae2;
+  border-radius: 10px;
+  color: #111;
+  margin-top: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.15);
+}
+.item.used {
+  background: #808e9b;
+  color: #333;
+}
+.item h2 {
+  margin: 0;
+}
+.item .date {
+  position: relative;
+  display: block;
+  font-size: 70%;
+  margin-bottom: 20px;
+}
+.item .date[data-date]:after {
+  content: attr(data-date);
+  background: #485460;
+  color: #eee;
+  position: absolute;
+  top: 150%;
+  left: -50%;
+  width: 140px;
+  padding: 10px;
+  transition: all 0.3s ease 0s;
+  opacity: 0;
+  z-index: 1;
+  border-radius: 10px;
+}
+.item .date[data-date]:hover:after {
+  opacity: 1;
+}
+.item > .buttons {
+  width: 100%;
+  display: flex;
+}
+.item > .buttons button {
+  flex-grow: 1;
+  height: 50px;
+  flex-basis: 60px;
+  border: 0;
+  border-radius: 10px 0 0 0;
+  background: #485460;
+  color: #eee;
+  margin-right: 1px;
+}
+.item > .buttons button:nth-child(2) {
+  border-radius: 0 10px 0 0;
+  margin-right: 0px;
+  margin-left: 1px;
+}
+
+.item .data {
+  padding: 20px;
+  text-align: center;
+}
+
+.item .data img,
+.item .data .item-number,
+.item .data .item-pin {
+  width: 100%;
+  display: block;
+}
+
+.item .data img {
+  margin-bottom: 20px;
+}
+
+.item .auth .header {
+  margin-top: 4px;
+  width: 100%;
+  font-size: small;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+}
+.item .auth .input {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.item .auth .input .chars {
+  flex: 4;
+  text-align: center;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+}
+.item .auth .input .chars span {
+  margin: 3px;
+}
+.item .auth .input button.submit {
+  background: #485460;
+  color: #eee;
+}
+.item .auth .input button.submit:active {
+  color: #eee;
+  background: #133c55;
+}
+.item .auth button {
+  width: 20%;
+  height: 40px;
+  border: 2px solid #d2dae2;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+}
+.item .auth button:active {
+  color: #eee;
+  background: #133c55;
+}
+
+.item .data .card-number,
+.item .data .card-pin {
+  display: block;
+}
+.item .data .value {
+  font-size: 70%;
+  font-weight: 700;
+}
+.item .data .code-wrapper {
+  padding: 10px;
+  background: #eee;
+}
+.item .data code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.item .data ul {
+  list-style-type: none;
+  text-align: left;
+  border-radius: 10px;
+  background: #133c55;
+  color: #eee;
+  padding: 15px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.item .confirm-delete {
+  text-align: center;
+  padding: 20px;
+}
+.item .confirm-delete .buttons {
+  display: flex;
+  margin-top: 20px;
+}
+
+.item .confirm-delete .buttons * {
+  flex: 1;
+  margin: 10px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+}
+
+.item .confirm-delete .buttons button:active {
+  color: #eee;
+  background: #133c55;
+}

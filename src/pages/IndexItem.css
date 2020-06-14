@@ -1,4 +1,4 @@
-.no-card {
+.no-items {
   width: 100%;
   background: #d2dae2;
   border-radius: 10px;
@@ -7,11 +7,13 @@
   line-height: 50px;
   color: #111;
   text-align: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.15);
 }
-.card-list {
+.item-list {
   padding: 0px;
 }
-.card-list li {
+.item-list li {
   list-style-type: none;
   width: 100%;
   background: #d2dae2;
@@ -21,26 +23,25 @@
   line-height: 50px;
   color: #111;
   display: flex;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 4px 6px -2px rgba(0, 0, 0, 0.15);
 }
-.card-list li.used {
+.item-list li.used {
   background: #808e9b;
   color: #333;
 }
-.card-list li > span {
+.item-list li > span {
   flex-grow: 4;
   cursor: pointer;
   padding: 0 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
-.card-list li > button {
+.item-list li > button {
   flex-basis: 60px;
   border: 0;
   border-radius: 0 10px 10px 0;
   background: #485460;
   color: #eee;
-}
-
-.card-list .key span {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
 }

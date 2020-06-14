@@ -2,16 +2,21 @@ import * as crypto from './crypto'
 
 export const loadCard = (cardId) =>
   JSON.parse(global.localStorage.getItem(`card-${cardId}`))
-export const loadCards = () =>
+export const loadCards = ({
+  sort = 'id',
+  sortDirection = -1,
+  filter = Boolean
+} = {}) =>
   Object.keys(global.localStorage)
     .filter((key) => key.slice(0, 4) === 'card')
     .map((key) => JSON.parse(global.localStorage.getItem(key)))
-    .sort((a, b) => b.id - a.id)
-export const toggleUsedCard = (id) => {
+    .filter(filter)
+    .sort((a, b) => (a[sort] - b[sort]) * sortDirection)
+export const updateCard = (id, mutate) => {
   const card = JSON.parse(global.localStorage.getItem(`card-${id}`))
-  card.used = !card.used
-  global.localStorage.setItem(`card-${id}`, JSON.stringify(card))
-  return card
+  const newCard = mutate(card)
+  global.localStorage.setItem(`card-${id}`, JSON.stringify(newCard))
+  return newCard
 }
 
 const encryptEncode = async (key, data) =>
@@ -40,20 +45,21 @@ export const encryptCards = (key, cards, password) => {
   )
 }
 export const decryptCard = async (key, card, password) => ({
-  id: card.id,
+  ...card,
   barcode: card.barcode && (await decryptDecode(key, card.barcode, password)),
   number: card.number && (await decryptDecode(key, card.number, password)),
-  pin: card.pin && (await decryptDecode(key, card.pin, password)),
-  amount: card.amount,
-  used: card.used
+  pin: card.pin && (await decryptDecode(key, card.pin, password))
 })
 
 export const importCards = (cards) => {
+  const now = new Date()
   cards
     .map((card) => ({
       ...card,
       amount: decodeURIComponent(card.amount),
-      id: decodeURIComponent(card.id)
+      id: decodeURIComponent(card.id),
+      createdAt: now,
+      notes: []
     }))
     .forEach((card) => {
       global.localStorage.setItem(`card-${card.id}`, JSON.stringify(card))
@@ -80,7 +86,9 @@ export const importLinkCard = (hash) => {
     amount: decodeURIComponent(amount),
     id: decodeURIComponent(id),
     keyId,
-    used: false
+    used: false,
+    createdAt: new Date(),
+    notes: []
   }
   global.localStorage.setItem(`card-${id}`, JSON.stringify(newCard))
   return newCard

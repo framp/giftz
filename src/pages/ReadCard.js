@@ -1,8 +1,9 @@
 import { createEffect, createState, useContext, Show } from 'solid-js'
 import { useHistory } from 'solid-router'
-import './ReadCard.css'
+import './ReadItem.css'
 import { StoreContext } from '../components/StoreProvider'
-import { loadCard, decryptCard, toggleUsedCard } from '../logic/Card'
+import { loadCard, decryptCard, updateCard } from '../logic/Card'
+import prettyDate from '../logic/prettyDate'
 import { loadKey } from '../logic/Key'
 import Barcode from '../components/Barcode'
 import OnScreenKeyboard from '../components/OnScreenKeyboard'
@@ -41,6 +42,11 @@ export default ({ cardId }) => {
         (state.submittedPassword && state.password && state.password.content) ||
           savedPassword
       )
+      if (!key) {
+        notify('Key not found for this card')
+        history.push('/cards')
+        return
+      }
       const decryptedCard = await decryptCard(key, loadedCard)
       if (state.submittedPassword && state.password && state.password.content) {
         rememberPassword(state.password.content, loadedCard.keyId)
@@ -54,13 +60,17 @@ export default ({ cardId }) => {
       if (e.message === 'password-required') {
         setState('requirePassword', true)
       } else {
+        console.log(e)
         notify('Wrong password')
       }
     }
   })
 
   const onToggleUsedCard = (targetId) => () => {
-    const toggledCard = toggleUsedCard(targetId)
+    const toggledCard = updateCard(targetId, (card) => ({
+      ...card,
+      used: !card.used
+    }))
     setState('card', 'used', toggledCard.used)
   }
   const onSubmitPassword = () => {
@@ -69,7 +79,7 @@ export default ({ cardId }) => {
   const card = state.card
 
   return (
-    <div class={`${card.used ? 'used' : ''} card`}>
+    <div class={`${card.used ? 'used' : ''} item`}>
       <div class='buttons'>
         <button onClick={() => history.push('/cards')}>Back to List</button>
         <button onClick={onToggleUsedCard(cardId)}>
@@ -88,6 +98,11 @@ export default ({ cardId }) => {
           <h2>
             Card #{card.id} - {card.amount}
           </h2>
+          <a class='date' data-date={card.createdAt}>
+            <Show when={card.createdAt}>
+              Added {prettyDate(card.createdAt)}
+            </Show>
+          </a>
           {String(card.barcode).match(/^data:image/) ? (
             <img src={card.barcode} alt='barcode' />
           ) : (
