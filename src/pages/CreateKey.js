@@ -66,10 +66,12 @@ export default () => {
           onInput={(e) => setState('password', e.target.value)}
         />
         <button onClick={onGenerateKey}>Generate a key</button>
+        <div class='help'>
+          <p>The password is required to access cards.</p>
+          <p>The key will be unlocked for 10 minutes</p>
+        </div>
         <Show when={!state.password}>
-          <div class='no-pwd-notice'>
-            (using an empty password is less safe)
-          </div>
+          <div class='help'>(using an empty password is less safe)</div>
         </Show>
         <Show when={Boolean(state.key)}>
           <h3>Key import link generated:</h3>
@@ -82,12 +84,24 @@ export default () => {
       <Show when={Boolean(state.key)}>
         <section class='generate-cards'>
           <h2>Insert your cards data</h2>
+          <div class='help'>
+            Check out the format{' '}
+            <a
+              target='_blank'
+              rel='noopener noreferrer'
+              href='https://github.com/framp/giftz#how-to-use'
+            >
+              here
+            </a>
+            .
+          </div>
           <FileTextArea
             value={state.cardInput}
             setValue={(value) => setState('cardInput', 'content', value)}
           />
           <Show when={Boolean(state.cardOutput)}>
             <h3>Card import links generated:</h3>
+
             <div class='code-wrapper'>
               <code>{state.cardOutput}</code>
             </div>

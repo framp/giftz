@@ -1,8 +1,10 @@
- - Loading animation for card view for super slow devices
- - Manage (archive / delete) keys / cards
+ - Add dates
  - Add notes / how much money is left on the giftcard
- - Hide used ones
- - Filter / Sort
+ - Add ReadKey with import link
+ - Check offline mode works with the service worker
+ - Manage (archive / delete) keys / cards
+ - Filter (used / unused | id ) / Sort 
  - Support names instead of ids
  - Download file with links on generation
- - Add dates
+ - Loading animation for card view for super slow devices
+ - Premium (£££): add data sync to server side
