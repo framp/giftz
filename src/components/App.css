@@ -9,7 +9,7 @@
 .notification {
   position: fixed;
   z-index: 101;
-  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   background: #fde073;
@@ -18,7 +18,7 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
     0 4px 6px -2px rgba(0, 0, 0, 0.15);
   animation: slideDown 5s ease;
-  transform: translateY(-50px);
+  transform: translateY(50px);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -64,7 +64,7 @@
 
 @keyframes slideDown {
   0% {
-    transform: translateY(-50px);
+    transform: translateY(50px);
   }
   10% {
     transform: translateY(0px);
@@ -73,6 +73,6 @@
     transform: translateY(0px);
   }
   100% {
-    transform: translateY(-50px);
+    transform: translateY(50px);
   }
 }

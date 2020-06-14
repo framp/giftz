@@ -80,16 +80,18 @@ export default ({ keyId }) => {
           </div>
 
           <ul>
-            <For
-              each={state.cards}
-              fallback={<div class='no-items'>No Cards</div>}
-            >
+            <For each={state.cards} fallback={<li>No Cards</li>}>
               {(card) => (
                 <li
                   onClick={() =>
                     history.push(`/cards/${global.encodeURIComponent(card.id)}`)}
                 >
-                  Card #{card.id} - <span>{card.amount}</span>
+                  Card #{card.id} -
+                  <span>
+                    {' '}
+                    {card.amount}
+                    {card.currency || ''}
+                  </span>
                 </li>
               )}
             </For>

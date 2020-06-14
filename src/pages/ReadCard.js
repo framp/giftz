@@ -1,4 +1,4 @@
-import { createEffect, createState, useContext, Show } from 'solid-js'
+import { createEffect, createState, useContext, Show, For } from 'solid-js'
 import { useHistory } from 'solid-router'
 import './ReadItem.css'
 import { StoreContext } from '../components/StoreProvider'
@@ -28,6 +28,7 @@ export default ({ cardId }) => {
     password: {
       content: ''
     },
+    newNote: '',
     requirePassword: false,
     submittedPassword: false
   })
@@ -66,23 +67,52 @@ export default ({ cardId }) => {
     }
   })
 
-  const onToggleUsedCard = (targetId) => () => {
-    const toggledCard = updateCard(targetId, (card) => ({
+  const onToggleUsedCard = (e) => {
+    const newCard = updateCard(cardId, (card) => ({
       ...card,
       used: !card.used
     }))
-    setState('card', 'used', toggledCard.used)
+    setState('card', 'used', newCard.used)
   }
   const onSubmitPassword = () => {
     setState('submittedPassword', true)
   }
+  const onChangeAmount = (e) => {
+    const newCard = updateCard(cardId, (card) => ({
+      ...card,
+      amount: e.target.value
+    }))
+    setState('card', 'amount', newCard.amount)
+  }
+  const onChangeNewNote = (e) => {
+    setState('newNote', e.target.value)
+  }
+  const onSubmitNewNote = (e) => {
+    const newCard = updateCard(cardId, (card) => ({
+      ...card,
+      notes: [{ content: state.newNote, createdAt: new Date() }].concat(
+        card.notes || []
+      )
+    }))
+    setState('card', 'notes', newCard.notes)
+    setState('newNote', '')
+  }
+  const onDeleteNote = (getIndex) => () => {
+    const index = getIndex()
+    const newCard = updateCard(cardId, (card) => ({
+      ...card,
+      notes: card.notes.slice(0, index).concat(card.notes.slice(index + 1))
+    }))
+    setState('card', 'notes', newCard.notes)
+  }
+
   const card = state.card
 
   return (
     <div class={`${card.used ? 'used' : ''} item`}>
       <div class='buttons'>
         <button onClick={() => history.push('/cards')}>Back to List</button>
-        <button onClick={onToggleUsedCard(cardId)}>
+        <button onClick={onToggleUsedCard}>
           Mark as {card.used ? 'unused' : 'used'}
         </button>
       </div>
@@ -97,6 +127,7 @@ export default ({ cardId }) => {
         <div class='data'>
           <h2>
             Card #{card.id} - {card.amount}
+            {card.currency || ''}
           </h2>
           <a class='date' data-date={card.createdAt}>
             <Show when={card.createdAt}>
@@ -122,6 +153,46 @@ export default ({ cardId }) => {
           <span class='card-pin'>
             <strong>PIN:</strong> {card.pin}
           </span>
+        </div>
+        <div class='operations'>
+          <div class='row'>
+            <div class='name'>Change amount:</div>
+            <div class='input amount'>
+              <input
+                type='number'
+                value={card.amount}
+                onInput={onChangeAmount}
+              />
+            </div>
+          </div>
+          <div class='row'>
+            <div class='name'>Add note:</div>
+            <div class='input'>
+              <input
+                type='text'
+                value={state.newNote}
+                onInput={onChangeNewNote}
+              />
+              <button onClick={onSubmitNewNote}>Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class='notes'>
+          <For each={card.notes}>
+            {(note, index) => (
+              <div>
+                <p>{note.content}</p>
+                <a class='date' data-date={note.createdAt}>
+                  <Show when={note.createdAt}>
+                    Added {prettyDate(card.createdAt)}
+                  </Show>
+                </a>
+                <a class='delete' onClick={onDeleteNote(index)}>
+                  ✕
+                </a>
+              </div>
+            )}
+          </For>
         </div>
       </Show>
     </div>

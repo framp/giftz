@@ -38,7 +38,12 @@ export default () => {
                 onClick={() =>
                   history.push(`/cards/${global.encodeURIComponent(card.id)}`)}
               >
-                Card #{card.id} - <span>{card.amount}</span>
+                Card #{card.id} -
+                <span>
+                  {' '}
+                  {card.amount}
+                  {card.currency || ''}
+                </span>
               </span>
               <button onClick={onToggleUsedCard(card.id)}>
                 Mark {card.used ? 'unused' : 'used'}

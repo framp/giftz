@@ -104,10 +104,14 @@
   color: #eee;
   background: #133c55;
 }
+.item .auth .row {
+  display: flex;
+}
 .item .auth button {
   width: 20%;
   height: 40px;
-  border: 2px solid #d2dae2;
+  margin: 2px;
+  border: 0;
   border-radius: 10px;
   transition: all 0.3s ease 0s;
 }
@@ -134,6 +138,7 @@
 }
 .item .data ul {
   list-style-type: none;
+  padding: 0;
 }
 .item .data ul li {
   text-align: left;
@@ -168,4 +173,64 @@
 .item .confirm-delete .buttons button:active {
   color: #eee;
   background: #133c55;
+}
+
+.item .operations {
+  padding: 0px 20px 20px 20px;
+}
+
+.item .operations .row {
+  display: flex;
+}
+.item .operations .row > div {
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.item .operations .row .input {
+  display: flex;
+}
+.item .operations .row .input input {
+  flex: 2;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px 0px 0px 10px;
+}
+.item .operations .row .input.amount input {
+  border-radius: 10px;
+}
+.item .operations .row .input input:focus {
+  outline: 0;
+}
+.item .operations .row .input button {
+  border: 0;
+  background: #485460;
+  color: #eee;
+  border-radius: 0px 10px 10px 0px;
+  transition: all 0.3s ease 0s;
+}
+.item .operations .row .input button:active {
+  color: #eee;
+  background: #133c55;
+}
+.item .notes {
+  padding: 0px 20px 20px 20px;
+}
+
+.item .notes > div {
+  border-top: 1px solid #333;
+  position: relative;
+}
+.item .notes > div > p {
+  margin-bottom: 0px;
+}
+
+.item .notes > div > .delete {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
 }

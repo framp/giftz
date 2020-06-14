@@ -34,11 +34,12 @@ const decryptDecode = (key, data) =>
 export const encryptCards = (key, cards, password) => {
   const keyId = key.id
   return Promise.all(
-    cards.map(async ({ barcode, number, pin, amount, id }) => ({
+    cards.map(async ({ barcode, number, pin, amount, currency, id }) => ({
       barcode: barcode && (await encryptEncode(key, barcode, password)),
       number: number && (await encryptEncode(key, number, password)),
       pin: pin && (await encryptEncode(key, pin, password)),
-      amount: encodeURIComponent(amount),
+      amount: encodeURIComponent(amount || ''),
+      currency: encodeURIComponent(currency || ''),
       id,
       keyId
     }))
@@ -56,7 +57,8 @@ export const importCards = (cards) => {
   cards
     .map((card) => ({
       ...card,
-      amount: decodeURIComponent(card.amount),
+      amount: decodeURIComponent(card.amount || ''),
+      currency: decodeURIComponent(card.currency || ''),
       id: decodeURIComponent(card.id),
       createdAt: now,
       notes: []
@@ -66,24 +68,34 @@ export const importCards = (cards) => {
     })
 }
 export const cardLinkSeparator = '-'
-export const makeCardLink = ({ barcode, number, pin, amount, id, keyId }) =>
+export const makeCardLink = ({
+  barcode,
+  number,
+  pin,
+  amount,
+  currency,
+  id,
+  keyId
+}) =>
   `${global.location.origin}/cards#${[
     barcode,
     number,
     pin,
     amount,
+    currency,
     id,
     keyId
   ].join(cardLinkSeparator)}`
 export const importLinkCard = (hash) => {
-  const [barcode, number, pin, amount, id, keyId] = hash.split(
+  const [barcode, number, pin, amount, currency, id, keyId] = hash.split(
     cardLinkSeparator
   )
   const newCard = {
     barcode,
     number,
     pin,
-    amount: decodeURIComponent(amount),
+    amount: decodeURIComponent(amount || ''),
+    currency: decodeURIComponent(currency || ''),
     id: decodeURIComponent(id),
     keyId,
     used: false,

@@ -14,7 +14,8 @@ WIP but functional if you like to fiddle.
   "barcode": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAABkAQMAAAAoir4RAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEpJREFUSIntyrEJADEIQNGAreAqwrVCVhccwFUObA+SKa77r35rrPw1kRDNnKoO8/BWmdKzY2ueJ79ePB6Px+PxeDwej8fj8X57Fyyp9/PFewItAAAAAElFTkSuQmCC",
   "number": "6341753502310869272",
   "pin": "1234",
-  "amount": "20£",
+  "amount": 20,
+  "currency": "£",
   "id": "1"
 }]
 ```
