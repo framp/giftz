@@ -156,17 +156,19 @@ export default ({ cardId }) => {
         </div>
         <div class='operations'>
           <div class='row'>
-            <div class='name'>Change amount:</div>
+            <div class='name'>Amount:</div>
             <div class='input amount'>
               <input
                 type='number'
+                step='any'
                 value={card.amount}
                 onInput={onChangeAmount}
               />
+              <button>{card.currency || '?'}</button>
             </div>
           </div>
           <div class='row'>
-            <div class='name'>Add note:</div>
+            <div class='name'>Note:</div>
             <div class='input'>
               <input
                 type='text'

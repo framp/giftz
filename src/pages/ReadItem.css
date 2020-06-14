@@ -181,15 +181,20 @@
 
 .item .operations .row {
   display: flex;
+  align-items: center;
 }
 .item .operations .row > div {
-  flex: 1;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
+.item .operations .row .name {
+  flex: 1;
+}
+
 .item .operations .row .input {
   display: flex;
+  flex: 2;
 }
 .item .operations .row .input input {
   flex: 2;
@@ -198,9 +203,6 @@
   padding: 10px;
   border: 0;
   border-radius: 10px 0px 0px 10px;
-}
-.item .operations .row .input.amount input {
-  border-radius: 10px;
 }
 .item .operations .row .input input:focus {
   outline: 0;
