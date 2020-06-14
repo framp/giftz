@@ -56,7 +56,8 @@
   display: block;
   position: relative;
 }
-.masthead a:hover:after {
+.masthead a:hover:after,
+.masthead a.active:after {
   background: #eee;
 }
 

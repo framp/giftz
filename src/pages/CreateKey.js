@@ -67,9 +67,9 @@ export default () => {
         />
         <button onClick={onGenerateKey}>Generate a key</button>
         <Show when={!state.password}>
-          <span class='no-pwd-notice'>
+          <div class='no-pwd-notice'>
             (using an empty password is less safe)
-          </span>
+          </div>
         </Show>
         <Show when={Boolean(state.key)}>
           <h3>Key import link generated:</h3>
