@@ -1,6 +1,6 @@
 export default (time) => {
   if (!time) return
-  const date = new Date((time || '').replace(/-/g, '/').replace(/[TZ]/g, ' '))
+  const date = new Date(Number(time))
   const diff = (new Date().getTime() - date.getTime()) / 1000
   const dayDiff = Math.floor(diff / 86400)
   const year = date.getFullYear()

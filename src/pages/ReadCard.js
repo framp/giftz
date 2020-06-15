@@ -88,9 +88,12 @@ export default ({ cardId }) => {
     setState('newNote', e.target.value)
   }
   const onSubmitNewNote = (e) => {
+    if (!state.newNote) {
+      return
+    }
     const newCard = updateCard(cardId, (card) => ({
       ...card,
-      notes: [{ content: state.newNote, createdAt: new Date() }].concat(
+      notes: [{ content: state.newNote, createdAt: Number(new Date()) }].concat(
         card.notes || []
       )
     }))
@@ -129,8 +132,8 @@ export default ({ cardId }) => {
             Card #{card.id} - {card.amount}
             {card.currency || ''}
           </h2>
-          <a class='date' data-date={card.createdAt}>
-            <Show when={card.createdAt}>
+          <a class='date' data-date={new Date(card.createdAt).toISOString()}>
+            <Show when={new Date(card.createdAt)}>
               Added {prettyDate(card.createdAt)}
             </Show>
           </a>
@@ -184,9 +187,9 @@ export default ({ cardId }) => {
             {(note, index) => (
               <div>
                 <p>{note.content}</p>
-                <a class='date' data-date={note.createdAt}>
+                <a class='date' data-date={new Date(note.createdAt).toISOString()}>
                   <Show when={note.createdAt}>
-                    Added {prettyDate(card.createdAt)}
+                    Added {prettyDate(note.createdAt)}
                   </Show>
                 </a>
                 <a class='delete' onClick={onDeleteNote(index)}>

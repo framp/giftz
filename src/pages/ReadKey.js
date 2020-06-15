@@ -65,7 +65,7 @@ export default ({ keyId }) => {
                 state.key.id.slice(16)
               ].join('-')}
           </h2>
-          <a class='date' data-date={state.key.createdAt}>
+          <a class='date' data-date={new Date(state.key.createdAt).toISOString()}>
             <Show when={state.key.createdAt}>
               Added {prettyDate(state.key.createdAt)}
             </Show>

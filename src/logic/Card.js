@@ -53,7 +53,7 @@ export const decryptCard = async (key, card, password) => ({
 })
 
 export const importCards = (cards) => {
-  const now = new Date()
+  const now = Number(new Date())
   cards
     .map((card) => ({
       ...card,
@@ -99,7 +99,7 @@ export const importLinkCard = (hash) => {
     id: decodeURIComponent(id),
     keyId,
     used: false,
-    createdAt: new Date(),
+    createdAt: Number(new Date()),
     notes: []
   }
   global.localStorage.setItem(`card-${id}`, JSON.stringify(newCard))

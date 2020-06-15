@@ -37,7 +37,7 @@ export const generateKey = async (password) => {
 export const importKey = (key) => {
   const newKey = {
     ...key,
-    createdAt: new Date()
+    createdAt: Number(new Date())
   }
   global.localStorage.setItem(`key-${key.id}`, JSON.stringify(newKey))
   return newKey
