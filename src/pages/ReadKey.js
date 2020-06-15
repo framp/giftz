@@ -74,11 +74,11 @@ export default ({ keyId }) => {
             Require Password:
             <span class='value'>{state.key.raw ? ' NO' : ' YES'}</span>
           </p>
-
-          <div class='code-wrapper'>
-            <code>{makeKeyLink(state.key)}</code>
-          </div>
-
+          <Show when={false}>
+            <div class='code-wrapper'>
+              <code>{makeKeyLink(state.key)}</code>
+            </div>
+          </Show>
           <ul>
             <For each={state.cards} fallback={<li>No Cards</li>}>
               {(card) => (
