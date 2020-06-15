@@ -3,7 +3,7 @@ import { useHistory } from 'solid-router'
 import './ReadItem.css'
 import { StoreContext } from '../components/StoreProvider'
 import { loadCard, decryptCard, updateCard } from '../logic/Card'
-import prettyDate from '../logic/prettyDate'
+import { prettyDate, renderDate } from '../logic/date'
 import { loadKey } from '../logic/Key'
 import Barcode from '../components/Barcode'
 import OnScreenKeyboard from '../components/OnScreenKeyboard'
@@ -132,7 +132,7 @@ export default ({ cardId }) => {
             Card #{card.id} - {card.amount}
             {card.currency || ''}
           </h2>
-          <a class='date' data-date={new Date(card.createdAt).toISOString()}>
+          <a class='date' data-date={renderDate(new Date(card.createdAt))}>
             <Show when={new Date(card.createdAt)}>
               Added {prettyDate(card.createdAt)}
             </Show>
@@ -187,7 +187,7 @@ export default ({ cardId }) => {
             {(note, index) => (
               <div>
                 <p>{note.content}</p>
-                <a class='date' data-date={new Date(note.createdAt).toISOString()}>
+                <a class='date' data-date={renderDate(new Date(note.createdAt))}>
                   <Show when={note.createdAt}>
                     Added {prettyDate(note.createdAt)}
                   </Show>

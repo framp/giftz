@@ -1,4 +1,9 @@
-export default (time) => {
+export const renderDate = (date) => {
+  if (isNaN(date)) return ''
+  return date.toISOString()
+}
+
+export const prettyDate = (time) => {
   if (!time) return
   const date = new Date(Number(time))
   const diff = (new Date().getTime() - date.getTime()) / 1000

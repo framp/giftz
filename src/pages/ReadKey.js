@@ -3,7 +3,7 @@ import { useHistory } from 'solid-router'
 import './ReadItem.css'
 import { StoreContext } from '../components/StoreProvider'
 import { loadCards } from '../logic/Card'
-import prettyDate from '../logic/prettyDate'
+import { prettyDate, renderDate } from '../logic/date'
 import { loadKey, deleteKey, makeKeyLink } from '../logic/Key'
 
 export default ({ keyId }) => {
@@ -65,7 +65,7 @@ export default ({ keyId }) => {
                 state.key.id.slice(16)
               ].join('-')}
           </h2>
-          <a class='date' data-date={new Date(state.key.createdAt).toISOString()}>
+          <a class='date' data-date={renderDate(new Date(state.key.createdAt))}>
             <Show when={state.key.createdAt}>
               Added {prettyDate(state.key.createdAt)}
             </Show>
