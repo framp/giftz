@@ -204,6 +204,9 @@
   border: 0;
   border-radius: 10px 0px 0px 10px;
 }
+.item.used .operations .row .input input {
+  background: #9aa9b7;
+}
 .item .operations .row .input input:focus {
   outline: 0;
 }
