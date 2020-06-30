@@ -15,5 +15,6 @@
   ],
   "theme_color": "#133C55",
   "background_color": "#133C55",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "./cards"
 }
