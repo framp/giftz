@@ -43,7 +43,7 @@ export const importKey = (key) => {
   return newKey
 }
 export const importKeyLink = (keyB64) => {
-  return importKey(global.atob(keyB64))
+  return importKey(JSON.parse(global.atob(keyB64)))
 }
 
 export const makeKeyLink = (exportedKey) => {
