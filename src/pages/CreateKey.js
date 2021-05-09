@@ -1,28 +1,29 @@
-import { createState, createEffect, useContext, Show } from 'solid-js'
-import { encryptCards, importCards, makeCardLink } from '../logic/Card'
-import { generateKey, makeKeyLink, importKey } from '../logic/Key'
-import FileTextArea from '../components/FileTextArea'
-import { StoreContext } from '../components/StoreProvider'
-import './CreateKey.css'
+import { createState, createEffect, useContext, Show } from "solid-js";
+import { encryptCards, importCards, makeCardLink } from "../logic/Card";
+import { generateKey, makeKeyLink, importKey } from "../logic/Key";
+import FileTextArea from "../components/FileTextArea";
+import { StoreContext } from "../components/StoreProvider";
+import "./CreateKey.css";
 
 export default () => {
-  const { notify } = useContext(StoreContext)[1]
+  const { notify } = useContext(StoreContext)[1];
   const [state, setState] = createState({
-    cardInput: { content: '' },
-    cardOutput: '',
+    cardInput: { content: "" },
+    cardOutput: "",
     cards: [],
-    password: '',
-    keyPassword: '',
+    password: "",
+    keyPassword: "",
     key: null,
-    exportedKey: null
-  })
+    exportedKey: null,
+  });
 
   createEffect(async () => {
-    let cardData = null
+    let cardData = null;
     try {
-      cardData = state.cardInput.content && JSON.parse(state.cardInput.content)
+      cardData = state.cardInput.content && JSON.parse(state.cardInput.content);
     } catch (e) {
-      console.log("Error while reading cards' data", e)
+      console.log("Error while reading cards' data", e);
+      setState("cardOutput", "");
     }
 
     if (cardData && cardData.length) {
@@ -30,78 +31,78 @@ export default () => {
         state.key,
         cardData,
         state.keyPassword
-      )
-      setState('cards', encryptedCards)
-      const links = encryptedCards.map(makeCardLink)
-      setState('cardOutput', links.join('\n'))
+      );
+      setState("cards", encryptedCards);
+      const links = encryptedCards.map(makeCardLink);
+      setState("cardOutput", links.join("\n"));
     }
-  })
+  });
 
   const onGenerateKey = async (e) => {
-    e.preventDefault()
-    const { key, exportedKey } = await generateKey(state.password)
-    setState('key', key)
-    setState('exportedKey', exportedKey)
-    setState('keyPassword', state.password)
-  }
+    e.preventDefault();
+    const { key, exportedKey } = await generateKey(state.password);
+    setState("key", key);
+    setState("exportedKey", exportedKey);
+    setState("keyPassword", state.password);
+  };
   const onImportKey = (e) => {
-    e.preventDefault()
-    const newKey = importKey(state.exportedKey)
-    notify(`Added new key #${newKey.id}`)
-  }
+    e.preventDefault();
+    const newKey = importKey(state.exportedKey);
+    notify(`Added new key #${newKey.id}`);
+  };
   const onImportCards = (e) => {
-    e.preventDefault()
-    importCards(state.cards)
-    notify('Added new cards')
-  }
+    e.preventDefault();
+    importCards(state.cards);
+    notify("Added new cards");
+  };
 
   return (
-    <form class='setup-form'>
-      <section class='generate-key'>
+    <form class="setup-form">
+      <section class="generate-key">
         <h2>Generate a new key</h2>
         <input
-          type='text'
-          placeholder='Password'
+          type="text"
+          placeholder="Password"
           value={state.password}
-          onInput={(e) => setState('password', e.target.value)}
+          onInput={(e) => setState("password", e.target.value)}
         />
         <button onClick={onGenerateKey}>Generate a key</button>
-        <div class='help'>
+        <div class="help">
           <p>The password is required to access cards</p>
           <p>The key will be unlocked for 10 minutes</p>
         </div>
         <Show when={!state.password}>
-          <div class='help'>(using an empty password is less safe)</div>
+          <div class="help">(using an empty password is less safe)</div>
         </Show>
         <Show when={Boolean(state.key)}>
           <h3>Key import link generated:</h3>
-          <div class='code-wrapper'>
+          <div class="code-wrapper">
             <code>{makeKeyLink(state.exportedKey)}</code>
           </div>
           <button onClick={onImportKey}>Import key link</button>
         </Show>
       </section>
       <Show when={Boolean(state.key)}>
-        <section class='generate-cards'>
+        <section class="generate-cards">
           <h2>Insert your cards data</h2>
-          <div class='help'>
-            Check out the format{' '}
+          <div class="help">
+            Check out the format{" "}
             <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href='https://github.com/framp/giftz#how-to-use'
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/framp/giftz#how-to-use"
             >
               here
             </a>
           </div>
           <FileTextArea
             value={state.cardInput}
-            setValue={(value) => setState('cardInput', 'content', value)}
+            setValue={(value) => setState("cardInput", "content", value)}
           />
           <Show when={Boolean(state.cardOutput)}>
             <h3>Card import links generated:</h3>
 
-            <div class='code-wrapper'>
+            <div class="code-wrapper">
               <code>{state.cardOutput}</code>
             </div>
             <button onClick={onImportCards}>Import card links</button>
@@ -109,5 +110,5 @@ export default () => {
         </section>
       </Show>
     </form>
-  )
-}
+  );
+};

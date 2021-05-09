@@ -1,59 +1,59 @@
-import { createEffect, createState, useContext, Show, For } from 'solid-js'
-import { useHistory } from 'solid-router'
-import './ReadItem.css'
-import { StoreContext } from '../components/StoreProvider'
-import { loadCards } from '../logic/Card'
-import { prettyDate, renderDate } from '../logic/date'
-import { loadKey, deleteKey, makeKeyLink } from '../logic/Key'
+import { createEffect, createState, useContext, Show, For } from "solid-js";
+import { useHistory } from "solid-router";
+import "./ReadItem.css";
+import { StoreContext } from "../components/StoreProvider";
+import { loadCards } from "../logic/Card";
+import { prettyDate, renderDate } from "../logic/date";
+import { loadKey, deleteKey, makeKeyLink } from "../logic/Key";
 
 export default ({ keyId }) => {
-  const [, { notify }] = useContext(StoreContext)
+  const [, { notify }] = useContext(StoreContext);
 
-  const history = useHistory()
+  const history = useHistory();
   const [state, setState] = createState({
     key: {},
     cards: [],
-    displayConfirmDelete: false
-  })
+    displayConfirmDelete: false,
+  });
   createEffect(async () => {
-    const key = loadKey(keyId, null, false)
-    setState('key', key)
-    const cards = loadCards({ filter: ({ keyId }) => keyId === key.id })
-    setState('cards', cards)
-  })
+    const key = loadKey(keyId, null, false);
+    setState("key", key);
+    const cards = loadCards({ filter: ({ keyId }) => keyId === key.id });
+    setState("cards", cards);
+  });
 
   const onDeleteKey = (e) => {
-    e.preventDefault()
-    setState('displayConfirmDelete', true)
-  }
+    e.preventDefault();
+    setState("displayConfirmDelete", true);
+  };
   const onCancelDeleteClick = (e) => {
-    e.preventDefault()
-    setState('displayConfirmDelete', false)
-  }
+    e.preventDefault();
+    setState("displayConfirmDelete", false);
+  };
   const onConfirmDeleteClick = (e) => {
-    e.preventDefault()
-    deleteKey(keyId)
-    notify('Key deleted')
-    history.push('/keys')
-  }
+    e.preventDefault();
+    deleteKey(keyId);
+    notify("Key deleted");
+    history.push("/keys");
+  };
   return (
-    <div class='item'>
-      <div class='buttons'>
-        <button onClick={() => history.push('/keys')}>Back to List</button>
+    <div class="item">
+      <div class="buttons2">
+        <button onClick={() => history.push("/keys")}>Back to List</button>
         <button onClick={onDeleteKey}>Delete</button>
       </div>
       <Show when={state.displayConfirmDelete}>
-        <div class='confirm-delete'>
-          <span>Are you sure you want to delete this key?</span>{' '}
+        <div class="confirm-delete">
+          <span>Are you sure you want to delete this key?</span>{" "}
           <span> All the attached cards will stop working</span>
-          <div class='buttons'>
+          <div class="buttons">
             <button onClick={onCancelDeleteClick}>Cancel</button>
             <button onClick={onConfirmDeleteClick}>Delete</button>
           </div>
         </div>
       </Show>
       <Show when={!state.displayConfirmDelete && state.key.id}>
-        <div class='data'>
+        <div class="data">
           <h2>
             Key #
             {state.key.id &&
@@ -62,20 +62,20 @@ export default ({ keyId }) => {
                 state.key.id.slice(8, 12),
                 state.key.id.slice(12, 16),
                 state.key.id.slice(12, 16),
-                state.key.id.slice(16)
-              ].join('-')}
+                state.key.id.slice(16),
+              ].join("-")}
           </h2>
-          <a class='date' data-date={renderDate(new Date(state.key.createdAt))}>
+          <a class="date" data-date={renderDate(new Date(state.key.createdAt))}>
             <Show when={state.key.createdAt}>
               Added {prettyDate(state.key.createdAt)}
             </Show>
           </a>
           <p>
             Require Password:
-            <span class='value'>{state.key.raw ? ' NO' : ' YES'}</span>
+            <span class="value">{state.key.raw ? " NO" : " YES"}</span>
           </p>
           <Show when={false}>
-            <div class='code-wrapper'>
+            <div class="code-wrapper">
               <code>{makeKeyLink(state.key)}</code>
             </div>
           </Show>
@@ -84,13 +84,14 @@ export default ({ keyId }) => {
               {(card) => (
                 <li
                   onClick={() =>
-                    history.push(`/cards/${global.encodeURIComponent(card.id)}`)}
+                    history.push(`/cards/${global.encodeURIComponent(card.id)}`)
+                  }
                 >
                   Card #{card.id} -
                   <span>
-                    {' '}
+                    {" "}
                     {card.amount}
-                    {card.currency || ''}
+                    {card.currency || ""}
                   </span>
                 </li>
               )}
@@ -99,5 +100,5 @@ export default ({ keyId }) => {
         </div>
       </Show>
     </div>
-  )
-}
+  );
+};

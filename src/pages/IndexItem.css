@@ -45,3 +45,14 @@
   background: #485460;
   color: #eee;
 }
+
+.item-list li.sort-menu {
+  height: 30px;
+  background: none;
+  box-shadow: none;
+  justify-content: space-between;
+}
+.item-list li.sort-menu > button {
+  flex-basis: 120px;
+  border-radius: 10px 10px 10px 10px;
+}
