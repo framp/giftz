@@ -2,6 +2,7 @@ import { For, createEffect, createState, useContext } from "solid-js";
 import { useHistory } from "solid-router";
 import "./IndexItem.css";
 import { importLinkCard, loadCards, updateCard } from "../logic/Card";
+import { loadSortingSettings, updateSortingSettings } from "../logic/Sorting";
 import { StoreContext } from "../components/StoreProvider";
 
 const filterLabels = ["all", "unused", "used"];
@@ -26,13 +27,15 @@ export default () => {
     filter: filterLabels[0],
   });
   createEffect(() => {
+    setState(loadSortingSettings());
+  });
+  createEffect(() => {
     const cardData = global.location.hash.slice(1);
     if (cardData.length) {
       const newCard = importLinkCard(cardData);
       notify(`Added card #${newCard.id}`);
       global.location.hash = "";
     }
-
     setState(
       "cards",
       loadCards({
@@ -42,6 +45,14 @@ export default () => {
       })
     );
   });
+
+  const onSortSettingUpdate = () => {
+    updateSortingSettings({
+      sort: state.sort,
+      sortDirection: state.sortDirection,
+      filter: state.filter,
+    });
+  };
 
   const onToggleUsedCard = (targetId) => () => {
     const card = updateCard(targetId, (card) => ({
@@ -57,14 +68,17 @@ export default () => {
     );
     const nextFilter = filterLabels[(filterIndex + 1) % filterLabels.length];
     setState("filter", nextFilter);
+    onSortSettingUpdate();
   };
   const onToggleSort = () => {
     const sortIndex = sortLabels.findIndex((label) => label === state.sort);
     const nextSort = sortLabels[(sortIndex + 1) % sortLabels.length];
     setState("sort", nextSort);
+    onSortSettingUpdate();
   };
   const onToggleSortDirection = () => {
     setState("sortDirection", state.sortDirection === -1 ? 1 : -1);
+    onSortSettingUpdate();
   };
 
   return (
