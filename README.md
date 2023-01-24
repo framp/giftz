@@ -4,6 +4,9 @@ An OSS application to manage encrypted giftcards.
 
 WIP but functional if you like to fiddle.
 
+<img width="563" alt="Screenshot 2023-01-24 at 19 46 46" src="https://user-images.githubusercontent.com/611109/214368996-036768fc-f608-4de9-ac8e-6b2ca6788dde.png">
+
+
 ## How to use
 
  - Visit https://giftz.framp.me/keys/new
